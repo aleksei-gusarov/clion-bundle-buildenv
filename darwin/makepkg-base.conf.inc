@@ -40,7 +40,9 @@ temp_destdir() {
   echo "$srcdir/dest-$CHOST"
 }
 
-PKGVERSION="JetBrains IDE bundle${BUILD_NUMBER:+; build ${BUILD_NUMBER}}"
+# A caller that already exported PKGVERSION means it — keep it. makepkg sources this file after the
+# environment, so an unconditional assignment here silently discards what the caller set.
+PKGVERSION="${PKGVERSION:-JetBrains IDE bundle${BUILD_NUMBER:+; build ${BUILD_NUMBER}}}"
 
 #########################################################################
 # SOURCE ACQUISITION

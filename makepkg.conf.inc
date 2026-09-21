@@ -2,7 +2,9 @@
 # Common bits for makepkg.conf
 #
 
-PKGVERSION="JetBrains IDE bundle${BUILD_NUMBER:+; build ${BUILD_NUMBER}}"
+# A caller that already exported PKGVERSION means it — keep it. makepkg sources this file after the
+# environment, so an unconditional assignment here silently discards what the caller set.
+PKGVERSION="${PKGVERSION:-JetBrains IDE bundle${BUILD_NUMBER:+; build ${BUILD_NUMBER}}}"
 
 
 #########################################################################
